@@ -17,7 +17,7 @@ ingit =      'git rev-parse --is-inside-work-tree 2>/dev/null'
 tags = 	     'git tag'
 checkout =   'git checkout tags/' # + version (detect)
 reset =      'git reset HEAD --hard'
-update =     'git pull origin master' # git pull, git pull origin master or git fetch
+update =     'git pull origin master' # fetch..
 submodules = 'git submodule update --init --recursive'
 clean = 'make clean'
 deps =  'make dep' # -j nProcs
@@ -29,10 +29,10 @@ for file in os.listdir('.'):
     if os.path.isdir(file):	
 	#print(file)
 	os.chdir(file)
-	closest_git_tag = None # closes to version
+	closest_git_tag = None # closest to version
 	version_found = False
 	git_tags_raw = subprocess.check_output(tags, shell=True)
-	split_tags_raw = git_tags_raw.split('\n') # todo: avoid copy..
+	split_tags_raw = git_tags_raw.split('\n')
 	git_tags = git_tags_raw.replace('v', '')
 	git_tags = git_tags.replace('VCV', '')
 	split_tags = git_tags.split('\n')
@@ -56,7 +56,7 @@ for file in os.listdir('.'):
 	  os.system(update)
 	  os.system(submodules)
 	  os.system(clean) #
-	  os.system(deps) # only for Rack, not plugins?
+	  #os.system(deps) # only for Rack, not plugins?
 	  os.system(make) #
 
 	os.chdir(plugins)

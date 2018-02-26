@@ -1,12 +1,12 @@
 import json
-from pprint import pprint
+#from pprint import pprint
 import os
 import sys
 
 repos = list()
 clone = "git clone "
 #git clone --recursive # to get submodules in one go..
-
+# ..community/plugins/
 os.chdir('plugins')
 
 for file in os.listdir('.'):
